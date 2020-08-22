@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         manoeuvre = Random.Range(0, 10);
         gameObject.name = GetStringFromList(PossibleNamesList);
         namePass.text = gameObject.name;
-        ToggleTorch();
+        //ToggleTorch();
         UpdateStrengths();
         RandomizeAppearance();
     }
