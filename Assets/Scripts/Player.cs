@@ -102,9 +102,9 @@ public class Player : MonoBehaviour
 
     private Color GenerateCloseColor(Color color)
     {
-        float newRed = Mathf.Clamp((color.r + Random.Range(-0.3f, 0.3f)), 0, 1);
-        float newGreen = Mathf.Clamp((color.g + Random.Range(-0.3f, 0.3f)), 0, 1);
-        float newBlue = Mathf.Clamp((color.b + Random.Range(-0.3f, 0.3f)), 0, 1);
+        float newRed = Mathf.Clamp((color.r + Random.Range(-0.5f, 0.5f)), 0, 1);
+        float newGreen = Mathf.Clamp((color.g + Random.Range(-0.5f, 0.5f)), 0, 1);
+        float newBlue = Mathf.Clamp((color.b + Random.Range(-0.5f, 0.5f)), 0, 1);
         return new Color(newRed, newGreen, newBlue);
     }
 
