@@ -8,17 +8,24 @@ public class Player : MonoBehaviour
 {
     [SerializeField] SpriteRenderer Skin;
     [SerializeField] SpriteRenderer Eyes;
-    SpriteRenderer Hair;
+    public SpriteRenderer Hair;
     [SerializeField] Transform HairChoiceParent;
-    SpriteRenderer Shirt;
+    public SpriteRenderer Shirt;
     [SerializeField] Transform ShirtChoiceParent;
-    SpriteRenderer Pants;
+    public SpriteRenderer Pants;
     [SerializeField] Transform PantsChoiceParent;
-    SpriteRenderer Shoes;
+    public SpriteRenderer Shoes;
     [SerializeField] Transform ShoesChoiceParent;
     [SerializeField] SpriteRenderer Buff;
     [SerializeField] ParticleSystem TorchFire;
     [SerializeField] SpriteRenderer ImmunityNecklace;
+
+    [SerializeField] GameObject editStats;
+    [SerializeField] SpriteRenderer voteParchment;
+    [SerializeField] TextMesh namePass;
+    [SerializeField] Transform challengeBar;
+    [SerializeField] Transform socialBar;
+    [SerializeField] Transform strategyBar;
 
     [SerializeField] TextAsset HairColorsList;
     [SerializeField] TextAsset EyesColorsList;
@@ -63,13 +70,16 @@ public class Player : MonoBehaviour
         hunting = Random.Range(0, 10);
         numbers = Random.Range(0, 10);
         manoeuvre = Random.Range(0, 10);
-
         gameObject.name = GetStringFromList(PossibleNamesList);
-
+        namePass.text = gameObject.name;
         ToggleTorch();
-
         UpdateStrengths();
         RandomizeAppearance();
+    }
+
+    public void ToggleStatsView()
+    {
+        editStats.SetActive(!editStats.activeSelf);
     }
 
     private void ToggleTorch()
@@ -92,9 +102,9 @@ public class Player : MonoBehaviour
 
     private Color GenerateCloseColor(Color color)
     {
-        float newRed = Mathf.Clamp((color.r + Random.Range(0f, 0.3f)), 0, 1);
-        float newGreen = Mathf.Clamp((color.r + Random.Range(0f, 0.3f)), 0, 1);
-        float newBlue = Mathf.Clamp((color.r + Random.Range(0f, 0.3f)), 0, 1);
+        float newRed = Mathf.Clamp((color.r + Random.Range(-0.3f, 0.3f)), 0, 1);
+        float newGreen = Mathf.Clamp((color.g + Random.Range(-0.3f, 0.3f)), 0, 1);
+        float newBlue = Mathf.Clamp((color.b + Random.Range(-0.3f, 0.3f)), 0, 1);
         return new Color(newRed, newGreen, newBlue);
     }
 
@@ -106,8 +116,28 @@ public class Player : MonoBehaviour
     private void UpdateStrengths()
     {
         socialStrength = Mathf.RoundToInt((leadership + likeability + read) / 3);
-        strategyStrength = Mathf.RoundToInt((aggressiveness+hunting+numbers+manoeuvre) / 4);
+        strategyStrength = Mathf.RoundToInt((aggressiveness + hunting + numbers + manoeuvre) / 4);
         threatLevel = Mathf.RoundToInt((socialStrength + strategyStrength + challengeStrength) / 3);
+
+        UpdateBars();
+    }
+
+    private void UpdateBars()
+    {
+        UpdateBar(challengeBar.GetComponentsInChildren<SpriteRenderer>(), challengeStrength);
+        UpdateBar(socialBar.GetComponentsInChildren<SpriteRenderer>(), socialStrength);
+        UpdateBar(strategyBar.GetComponentsInChildren<SpriteRenderer>(), strategyStrength);
+
+    }
+
+    private void UpdateBar(SpriteRenderer[] boxes, int strength)
+    {
+        int counter = 0;
+        foreach (SpriteRenderer sr in boxes)
+        {
+            sr.enabled = counter < strength;
+            counter++;
+        }
     }
 
     private void RandomizeAppearance()
@@ -121,6 +151,8 @@ public class Player : MonoBehaviour
         Shirt = ChooseSprite(shirtChoices);
         Pants = ChooseSprite(pantsChoices);
         Shoes = ChooseSprite(shoesChoices);
+
+        SetOriginalTribeColor(Buff.color);
 
         DisableSpriteChoices(hairChoices);
         DisableSpriteChoices(shirtChoices);
