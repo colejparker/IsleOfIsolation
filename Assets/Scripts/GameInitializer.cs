@@ -22,6 +22,8 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] GameObjectContainer playerContainer;
     [SerializeField] GameObjectContainer tribeContainer;
 
+    [SerializeField] AllPlayer allPlayer;
+
     public void Start()
     {
         SortTribeLists();
@@ -57,6 +59,7 @@ public class GameInitializer : MonoBehaviour
         this.playersStartingGame = createPlayers(numberOfPlayers);
         this.tribes = initializeTribes(numberOfTribes, this.playersStartingGame);
         this.relationshipsOfPlayers = generateRelationships(this.playersStartingGame);
+        allPlayer.InitializeGame(tribes);
     }
 
     public List<Player> createPlayers(int numberOfPlayers)
