@@ -8,21 +8,23 @@ public class Player : MonoBehaviour
 {
     public bool inEditMode = true;
 
-    [SerializeField] SpriteRenderer Skin;
-    [SerializeField] SpriteRenderer Eyes;
+    public SpriteRenderer Skin;
+    public SpriteRenderer Eyes;
     public SpriteRenderer Hair;
-    [SerializeField] Transform HairChoiceParent;
+    public Transform HairChoiceParent;
     public SpriteRenderer Shirt;
-    [SerializeField] Transform ShirtChoiceParent;
+    public Transform ShirtChoiceParent;
     public SpriteRenderer Pants;
-    [SerializeField] Transform PantsChoiceParent;
+    public Transform PantsChoiceParent;
     public SpriteRenderer Shoes;
-    [SerializeField] Transform ShoesChoiceParent;
+    public Transform ShoesChoiceParent;
     [SerializeField] SpriteRenderer Buff;
     [SerializeField] ParticleSystem TorchFire;
     [SerializeField] SpriteRenderer ImmunityNecklace;
-    [SerializeField] SpriteRenderer Beard;
-    [SerializeField] SpriteRenderer Glasses;
+    public SpriteRenderer Beard;
+    public SpriteRenderer Glasses;
+
+    [SerializeField] EditPlayer editPlayerPrefab;
 
 
     [SerializeField] SpriteRenderer hoverSquare;
@@ -279,7 +281,12 @@ public class Player : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(inEditMode) print(gameObject.name);
+        if (inEditMode)
+        {
+            EditPlayer newEP = Instantiate(editPlayerPrefab, Vector3.zero, Quaternion.identity);
+            newEP.setPlayer(this);
+        }
+
     }
 
     private void OnMouseEnter()

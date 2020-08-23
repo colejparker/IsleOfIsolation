@@ -31,6 +31,8 @@ public class GameInitializer : MonoBehaviour
 
     public void SortTribeLists()
     {
+        colorList.Clear();
+        nameList.Clear();
         char[] archDelim = new char[] { '\r', '\n' };
         string[] colorStringArray = GenerateStringArrayFromList(TribeColorsTextList);
         string[] nameStringArray = GenerateStringArrayFromList(TribeNamesTextList);

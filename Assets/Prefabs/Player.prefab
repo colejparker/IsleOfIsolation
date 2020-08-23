@@ -1516,7 +1516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657372730968815
 SpriteRenderer:
@@ -1956,7 +1956,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657373079034496
 SpriteRenderer:
@@ -2396,7 +2396,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657373263306716
 SpriteRenderer:
@@ -2480,7 +2480,7 @@ GameObject:
   - component: {fileID: 5726657373307974203}
   - component: {fileID: 5726657373307974202}
   m_Layer: 0
-  m_Name: PigTails
+  m_Name: Pigtails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2498,7 +2498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657373307974203
 SpriteRenderer:
@@ -2630,12 +2630,12 @@ Transform:
   - {fileID: 5726657373356463758}
   - {fileID: 5726657373669922500}
   - {fileID: 5726657372897836755}
-  - {fileID: 5726657373079034498}
   - {fileID: 5726657372730968849}
   - {fileID: 5726657373307974205}
   - {fileID: 5726657373776636566}
   - {fileID: 5726657374345048092}
   - {fileID: 5726657373263306718}
+  - {fileID: 5726657373079034498}
   m_Father: {fileID: 5726657374114100267}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3194,7 +3194,7 @@ GameObject:
   - component: {fileID: 5726657373776636564}
   - component: {fileID: 5726657373776636567}
   m_Layer: 0
-  m_Name: PonyTail
+  m_Name: Ponytail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3212,7 +3212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657373776636564
 SpriteRenderer:
@@ -3644,6 +3644,7 @@ MonoBehaviour:
   ImmunityNecklace: {fileID: 5726657374081374331}
   Beard: {fileID: 2572795644443025}
   Glasses: {fileID: 6730483636006126320}
+  editPlayerPrefab: {fileID: 5988738692728980845, guid: a2d2f9791c2c9c64bab99ec2681bc738, type: 3}
   hoverSquare: {fileID: 723371553060654475}
   editStats: {fileID: 7179943616460001992}
   voteParchment: {fileID: 3336347020446609415}
@@ -3865,7 +3866,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5726657373332094483}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5726657374345048090
 SpriteRenderer:
