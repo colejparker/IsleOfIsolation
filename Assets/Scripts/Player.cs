@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
+    public bool inEditMode = true;
+
     [SerializeField] SpriteRenderer Skin;
     [SerializeField] SpriteRenderer Eyes;
     public SpriteRenderer Hair;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
     [SerializeField] SpriteRenderer Buff;
     [SerializeField] ParticleSystem TorchFire;
     [SerializeField] SpriteRenderer ImmunityNecklace;
+
+    [SerializeField] SpriteRenderer hoverSquare;
 
     [SerializeField] GameObject editStats;
     [SerializeField] SpriteRenderer voteParchment;
@@ -202,6 +206,27 @@ public class Player : MonoBehaviour
     void Update()
     {
         ImmunityNecklace.enabled = isImmune;
+    }
+
+    private void OnMouseDown()
+    {
+        if(inEditMode) print(gameObject.name);
+    }
+
+    private void OnMouseEnter()
+    {
+        if (inEditMode)
+        {
+            hoverSquare.enabled = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (inEditMode)
+        {
+            hoverSquare.enabled = false;
+        }
     }
 
     public void addRelationship(Tuple<Player, Player, int> relationship)

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AllPlayer : MonoBehaviour
 {
+    [SerializeField] Canvas startGame;
+
     [SerializeField] Transform twoTribesCanvas;
     [SerializeField] Transform threeTribesCanvas;
     // Start is called before the first frame update
@@ -105,9 +107,16 @@ public class AllPlayer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BackClick()
     {
-
+        foreach(Tribe t in tribes)
+        {
+            foreach (Player member in t.members)
+            {
+                if (member) Destroy(member.gameObject);
+            }
+            Destroy(t.gameObject);
+        }
+        startGame.gameObject.SetActive(true);
     }
 }

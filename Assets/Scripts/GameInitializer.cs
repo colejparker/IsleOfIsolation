@@ -29,7 +29,7 @@ public class GameInitializer : MonoBehaviour
         SortTribeLists();
     }
 
-    private void SortTribeLists()
+    public void SortTribeLists()
     {
         char[] archDelim = new char[] { '\r', '\n' };
         string[] colorStringArray = GenerateStringArrayFromList(TribeColorsTextList);

@@ -20,6 +20,7 @@ public class StartGame : MonoBehaviour
 
     public void PlayGame()
     {
+        gameInitializer.SortTribeLists();
         gameInitializer.StartGame(numberOfTribes, numberOfPlayers);
         gameObject.SetActive(false);
     }
