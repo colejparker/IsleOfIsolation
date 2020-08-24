@@ -326,7 +326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae6aa8955013c334b89b2e705bf2c9b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -351,19 +351,35 @@ MonoBehaviour:
   Skin: {fileID: 1639340708983815784}
   Eyes: {fileID: 8398814356326937966}
   Hair: {fileID: 0}
-  currentHairIndex: 0
   HairChoiceParent: {fileID: 1003521380706114913}
   Shirt: {fileID: 0}
-  currentShirtIndex: 0
   ShirtChoiceParent: {fileID: 7599665000032159860}
   Pants: {fileID: 0}
-  currentPantsIndex: 0
   PantsChoiceParent: {fileID: 5005264739893540152}
   Shoes: {fileID: 0}
-  currentShoesIndex: 0
   ShoesChoiceParent: {fileID: 8008711735375286716}
   Beard: {fileID: 5188674382094980100}
   Glasses: {fileID: 5935102048560347175}
+  imageHairChoices:
+  - {fileID: 846087304676319619}
+  - {fileID: 7583751810772264864}
+  - {fileID: 2213057762372677337}
+  - {fileID: 5161372839399486982}
+  - {fileID: 5868270490102454422}
+  - {fileID: 510089323498997277}
+  - {fileID: 4834787032216051054}
+  - {fileID: 1161115707209634949}
+  - {fileID: 2135338142060533994}
+  imageShirtChoices:
+  - {fileID: 7316528171198562202}
+  - {fileID: 8998569687423081921}
+  - {fileID: 1292272740549201492}
+  imageShoesChoices:
+  - {fileID: 2589237963095087837}
+  - {fileID: 655520022560239820}
+  imagePantsChoices:
+  - {fileID: 9063702435501331454}
+  - {fileID: 6374857710968977715}
   player: {fileID: 0}
 --- !u!1 &1645647441728483213
 GameObject:
@@ -849,6 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainPlayerImage: {fileID: 7309199983749786057}
+  InputText: {fileID: 8123318885307114351}
 --- !u!1 &2260851619273954751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,14 +1277,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae6aa8955013c334b89b2e705bf2c9b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1721,7 +1738,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4621580392988526750}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1734,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae6aa8955013c334b89b2e705bf2c9b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3201,7 +3218,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1559886592140266737}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5988738692728980845}
+        m_TargetAssemblyTypeName: EditPlayer, Assembly-CSharp
+        m_MethodName: CloseWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8530717067186586585
 GameObject:
   m_ObjectHideFlags: 0

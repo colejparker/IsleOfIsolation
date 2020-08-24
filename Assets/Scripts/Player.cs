@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] EditPlayer editPlayerPrefab;
 
-
     [SerializeField] SpriteRenderer hoverSquare;
 
     [SerializeField] GameObject editStats;
@@ -40,10 +39,10 @@ public class Player : MonoBehaviour
     [SerializeField] TextAsset EyesColorsList;
     [SerializeField] TextAsset PossibleNamesList;
 
-    SpriteRenderer[] hairChoices;
-    SpriteRenderer[] shirtChoices;
-    SpriteRenderer[] pantsChoices;
-    SpriteRenderer[] shoesChoices;
+    public List<SpriteRenderer> hairChoices;
+    public List<SpriteRenderer> shirtChoices;
+    public List<SpriteRenderer> pantsChoices;
+    public List<SpriteRenderer> shoesChoices;
 
     public int leadership; // 0-9 on how likely they are to be higher in alliance hierarchy
     public int likeability;  // 0-9 on how likely they are to form good relationships
@@ -196,11 +195,6 @@ public class Player : MonoBehaviour
 
     private void RandomizeAppearance()
     {
-        hairChoices = HairChoiceParent.GetComponentsInChildren<SpriteRenderer>();
-        shirtChoices = ShirtChoiceParent.GetComponentsInChildren<SpriteRenderer>();
-        pantsChoices = PantsChoiceParent.GetComponentsInChildren<SpriteRenderer>();
-        shoesChoices = ShoesChoiceParent.GetComponentsInChildren<SpriteRenderer>();
-
         int beardNumber = Random.Range(0, 10);
         int glassesNumber = Random.Range(0, 10);
 
@@ -253,12 +247,12 @@ public class Player : MonoBehaviour
         Skin.color = new Color(skinColor, skinColor, skinColor);
     }
 
-    private SpriteRenderer ChooseSprite(SpriteRenderer[] options)
+    private SpriteRenderer ChooseSprite(List<SpriteRenderer> options)
     {
-        return options[Mathf.RoundToInt(Random.Range(0, options.Length))];
+        return options[Mathf.RoundToInt(Random.Range(0, options.Count))];
     }
 
-    private void DisableSpriteChoices(SpriteRenderer[] options)
+    private void DisableSpriteChoices(List<SpriteRenderer> options)
     {
         foreach (SpriteRenderer sr in options)
         {
@@ -283,8 +277,10 @@ public class Player : MonoBehaviour
     {
         if (inEditMode)
         {
+            hoverSquare.enabled = false;
             EditPlayer newEP = Instantiate(editPlayerPrefab, Vector3.zero, Quaternion.identity);
             newEP.setPlayer(this);
+            ToggleAllPlayers(false);
         }
 
     }
@@ -309,5 +305,15 @@ public class Player : MonoBehaviour
     {
         this.relationships.Add(relationship);
     }
+
+    public void ToggleAllPlayers(bool boolValue)
+    {
+        foreach(Tuple<Player, Player, int> tuple in relationships)
+        {
+            tuple.Item2.gameObject.SetActive(boolValue);
+        }
+        this.gameObject.SetActive(boolValue);
+    }
+
 
 }
