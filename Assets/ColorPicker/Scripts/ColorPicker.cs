@@ -241,7 +241,6 @@ namespace ColorPickerUtil
                 m_newColorCMYK = new ColorCMYK(m_newColor);
             } catch
             {
-                print("Caught in RefreshColor");
             }
             RefreshInputField();
         }
@@ -322,7 +321,6 @@ namespace ColorPickerUtil
                 }
             } catch
             {
-                print("Caught in RefreshPicker");
             }
 
             pickArea.value = areaValue;
