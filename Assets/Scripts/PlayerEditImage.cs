@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerEditImage : MonoBehaviour
 {
 
-    [SerializeField] Image Skin;
-    [SerializeField] Image Eyes;
+    public Image Skin;
+    public Image Eyes;
     public Image Hair;
     [SerializeField] Transform HairChoiceParent;
     public Image Shirt;

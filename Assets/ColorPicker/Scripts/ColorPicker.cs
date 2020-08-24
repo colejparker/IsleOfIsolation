@@ -38,6 +38,8 @@ namespace ColorPickerUtil
         [SerializeField] InputField input_CMYK_K;
         [SerializeField] InputField input_Alpha;
 
+        public ColorImage colorImage;
+
         private bool inputFieldLock = false;
         public Mode mode;
         public PickArea pickArea;
@@ -239,7 +241,7 @@ namespace ColorPickerUtil
                 m_newColorCMYK = new ColorCMYK(m_newColor);
             } catch
             {
-
+                print("Caught in RefreshColor");
             }
             RefreshInputField();
         }
@@ -320,9 +322,9 @@ namespace ColorPickerUtil
                 }
             } catch
             {
-
+                print("Caught in RefreshPicker");
             }
-            
+
             pickArea.value = areaValue;
             pickBar.value = barValue;
             pickArea.Refresh();
@@ -641,6 +643,11 @@ namespace ColorPickerUtil
         public void InputEndAlpha(string str)
         {
             if (str == "" || str == "-") { str = "0"; InputEndAlpha(str); }
+        }
+
+        public void OkClick()
+        {
+            colorImage.PickColor();
         }
     }
 }

@@ -15,12 +15,37 @@ public class ColorImage : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
+        if (affectedElement == "Hair")
+        {
+            image.color = mainPlayerImage.Hair.color;
+        }
+        else if (affectedElement == "Shoes")
+        {
+            image.color = mainPlayerImage.Shoes.color;
+        }
+        else if (affectedElement == "Shirt")
+        {
+            image.color = mainPlayerImage.Shirt.color;
+        }
+        else if (affectedElement == "Pants")
+        {
+            image.color = mainPlayerImage.Pants.color;
+        }
+        else if (affectedElement == "Eyes")
+        {
+            image.color = mainPlayerImage.Eyes.color;
+        }
+        else if (affectedElement == "Skin")
+        {
+            image.color = mainPlayerImage.Skin.color;
+        }
     }
 
 
-    private void OnMouseDown()
+    public void OpenColorPicker()
     {
         colorPicker.currentColor = image.color;
+        colorPicker.colorImage = this;
     }
 
     public void PickColor()
@@ -37,9 +62,17 @@ public class ColorImage : MonoBehaviour
         else if (affectedElement == "Shirt")
         {
             mainPlayerImage.Shirt.color = colorPicker.newColor;
-        } else
+        } else if (affectedElement == "Pants")
         {
             mainPlayerImage.Pants.color = colorPicker.newColor;
+        }
+        else if (affectedElement == "Eyes")
+        {
+            mainPlayerImage.Eyes.color = colorPicker.newColor;
+        }
+        else if (affectedElement == "Skin")
+        {
+            mainPlayerImage.Skin.color = colorPicker.newColor;
         }
         image.color = colorPicker.newColor;
         
