@@ -48,13 +48,13 @@ namespace ColorPickerUtil
         private Color m_newColor;
         public Color newColor { get { return new Color(m_newColor.r, m_newColor.g, m_newColor.b, m_alpha); } }
         private ColorHSV m_newColorHSV;
-        public ColorHSV newColorHSV { get { return new ColorHSV(m_newColorHSV.h, m_newColorHSV.s, m_newColorHSV.v, m_alpha); } }
+        public ColorHSV newColorHSV { get { if (m_newColorHSV != null) return new ColorHSV(m_newColorHSV.h, m_newColorHSV.s, m_newColorHSV.v, m_alpha); else return null; } }
         private ColorLab m_newColorLab;
-        public ColorLab newColorLab { get { return new ColorLab(m_newColorLab.L, m_newColorLab.a, m_newColorLab.b, m_alpha); } }
+        public ColorLab newColorLab { get { if (m_newColorLab != null) return new ColorLab(m_newColorLab.L, m_newColorLab.a, m_newColorLab.b, m_alpha); else return null; } }
         private ColorHex m_newColorHex;
-        public ColorHex newColorHex { get { return new ColorHex(m_newColorHex.hex, m_alpha); } }
+        public ColorHex newColorHex { get { if (m_newColorHex != null) return new ColorHex(m_newColorHex.hex, m_alpha); else return null; } }
         private ColorCMYK m_newColorCMYK;
-        public ColorCMYK newColorCMYK { get { return new ColorCMYK(m_newColorCMYK.c, m_newColorCMYK.m, m_newColorCMYK.y, m_newColorCMYK.k, m_alpha); } }
+        public ColorCMYK newColorCMYK { get { if (m_newColorCMYK != null) return new ColorCMYK(m_newColorCMYK.c, m_newColorCMYK.m, m_newColorCMYK.y, m_newColorCMYK.k, m_alpha); else return null; } }
         private Color m_currentColor;
         public Color currentColor
         {
@@ -128,114 +128,119 @@ namespace ColorPickerUtil
 
         public void RefreshColor()
         {
-            switch (mode)
+            try
             {
-                case Mode.HSV_H:
-                    {
-                        float h = pickBar.value * 360.0f;
-                        float s = pickArea.value.x;
-                        float v = pickArea.value.y;
+                switch (mode)
+                {
+                    case Mode.HSV_H:
+                        {
+                            float h = pickBar.value * 360.0f;
+                            float s = pickArea.value.x;
+                            float v = pickArea.value.y;
 
-                        m_newColorHSV = new ColorHSV(h, s, v);
-                        m_newColor = m_newColorHSV.ToColor();
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.HSV_S:
-                    {
-                        float h = pickArea.value.x * 360.0f;
-                        float s = pickBar.value;
-                        float v = pickArea.value.y;
+                            m_newColorHSV = new ColorHSV(h, s, v);
+                            m_newColor = m_newColorHSV.ToColor();
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.HSV_S:
+                        {
+                            float h = pickArea.value.x * 360.0f;
+                            float s = pickBar.value;
+                            float v = pickArea.value.y;
 
-                        m_newColorHSV = new ColorHSV(h, s, v);
-                        m_newColor = m_newColorHSV.ToColor();
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.HSV_V:
-                    {
-                        float h = pickArea.value.x * 360.0f;
-                        float s = pickArea.value.y;
-                        float v = pickBar.value;
+                            m_newColorHSV = new ColorHSV(h, s, v);
+                            m_newColor = m_newColorHSV.ToColor();
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.HSV_V:
+                        {
+                            float h = pickArea.value.x * 360.0f;
+                            float s = pickArea.value.y;
+                            float v = pickBar.value;
 
-                        m_newColorHSV = new ColorHSV(h, s, v);
-                        m_newColor = m_newColorHSV.ToColor();
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.RGB_R:
-                    {
-                        float r = pickBar.value;
-                        float g = pickArea.value.y;
-                        float b = pickArea.value.x;
+                            m_newColorHSV = new ColorHSV(h, s, v);
+                            m_newColor = m_newColorHSV.ToColor();
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.RGB_R:
+                        {
+                            float r = pickBar.value;
+                            float g = pickArea.value.y;
+                            float b = pickArea.value.x;
 
-                        m_newColor = new Color(r, g, b);
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.RGB_G:
-                    {
-                        float r = pickArea.value.y;
-                        float g = pickBar.value;
-                        float b = pickArea.value.x;
+                            m_newColor = new Color(r, g, b);
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.RGB_G:
+                        {
+                            float r = pickArea.value.y;
+                            float g = pickBar.value;
+                            float b = pickArea.value.x;
 
-                        m_newColor = new Color(r, g, b);
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.RGB_B:
-                    {
-                        float r = pickArea.value.x;
-                        float g = pickArea.value.y;
-                        float b = pickBar.value;
+                            m_newColor = new Color(r, g, b);
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.RGB_B:
+                        {
+                            float r = pickArea.value.x;
+                            float g = pickArea.value.y;
+                            float b = pickBar.value;
 
-                        m_newColor = new Color(r, g, b);
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                        m_newColorLab = new ColorLab(m_newColor);
-                    }
-                    break;
-                case Mode.Lab_L:
-                    {
-                        float L = pickBar.value * 100.0f;
-                        float a = pickArea.value.x * 255.0f - 128.0f;
-                        float b = pickArea.value.y * 255.0f - 128.0f;
+                            m_newColor = new Color(r, g, b);
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                            m_newColorLab = new ColorLab(m_newColor);
+                        }
+                        break;
+                    case Mode.Lab_L:
+                        {
+                            float L = pickBar.value * 100.0f;
+                            float a = pickArea.value.x * 255.0f - 128.0f;
+                            float b = pickArea.value.y * 255.0f - 128.0f;
 
-                        m_newColorLab = new ColorLab(L, a, b);
-                        m_newColor = m_newColorLab.ToColor();
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                    }
-                    break;
-                case Mode.Lab_a:
-                    {
-                        float L = pickArea.value.y * 100.0f;
-                        float a = pickBar.value * 255.0f - 128.0f;
-                        float b = pickArea.value.x * 255.0f - 128.0f;
+                            m_newColorLab = new ColorLab(L, a, b);
+                            m_newColor = m_newColorLab.ToColor();
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                        }
+                        break;
+                    case Mode.Lab_a:
+                        {
+                            float L = pickArea.value.y * 100.0f;
+                            float a = pickBar.value * 255.0f - 128.0f;
+                            float b = pickArea.value.x * 255.0f - 128.0f;
 
-                        m_newColorLab = new ColorLab(L, a, b);
-                        m_newColor = m_newColorLab.ToColor();
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                    }
-                    break;
-                case Mode.Lab_b:
-                    {
-                        float L = pickArea.value.y * 100.0f;
-                        float a = pickArea.value.x * 255.0f - 128.0f;
-                        float b = pickBar.value * 255.0f - 128.0f;
+                            m_newColorLab = new ColorLab(L, a, b);
+                            m_newColor = m_newColorLab.ToColor();
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                        }
+                        break;
+                    case Mode.Lab_b:
+                        {
+                            float L = pickArea.value.y * 100.0f;
+                            float a = pickArea.value.x * 255.0f - 128.0f;
+                            float b = pickBar.value * 255.0f - 128.0f;
 
-                        m_newColorLab = new ColorLab(L, a, b);
-                        m_newColor = m_newColorLab.ToColor();
-                        m_newColorHSV = new ColorHSV(m_newColor);
-                    }
-                    break;
-                default:
-                    break;
+                            m_newColorLab = new ColorLab(L, a, b);
+                            m_newColor = m_newColorLab.ToColor();
+                            m_newColorHSV = new ColorHSV(m_newColor);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                m_newColorHex = new ColorHex(m_newColor);
+                m_newColorCMYK = new ColorCMYK(m_newColor);
+            } catch
+            {
+
             }
-
-            m_newColorHex = new ColorHex(m_newColor);
-            m_newColorCMYK = new ColorCMYK(m_newColor);
-
             RefreshInputField();
         }
 
@@ -243,74 +248,81 @@ namespace ColorPickerUtil
         {
             Vector2 areaValue = new Vector2();
             float barValue = 0.0f;
-            switch (mode)
+            try
             {
-                case Mode.HSV_H:
-                    {
-                        barValue = m_newColorHSV.h / 360.0f;
-                        areaValue.x = m_newColorHSV.s;
-                        areaValue.y = m_newColorHSV.v;
-                    }
-                    break;
-                case Mode.HSV_S:
-                    {
-                        barValue = m_newColorHSV.s;
-                        areaValue.x = m_newColorHSV.h / 360.0f;
-                        areaValue.y = m_newColorHSV.v;
-                    }
-                    break;
-                case Mode.HSV_V:
-                    {
-                        barValue = m_newColorHSV.v;
-                        areaValue.x = m_newColorHSV.h / 360.0f;
-                        areaValue.y = m_newColorHSV.s;
-                    }
-                    break;
-                case Mode.RGB_R:
-                    {
-                        barValue = m_newColor.r;
-                        areaValue.x = m_newColor.b;
-                        areaValue.y = m_newColor.g;
-                    }
-                    break;
-                case Mode.RGB_G:
-                    {
-                        barValue = m_newColor.g;
-                        areaValue.x = m_newColor.b;
-                        areaValue.y = m_newColor.r;
-                    }
-                    break;
-                case Mode.RGB_B:
-                    {
-                        barValue = m_newColor.b;
-                        areaValue.x = m_newColor.r;
-                        areaValue.y = m_newColor.g;
-                    }
-                    break;
-                case Mode.Lab_L:
-                    {
-                        barValue = m_newColorLab.L / 100.0f;
-                        areaValue.x = (m_newColorLab.a + 128.0f) / 255.0f;
-                        areaValue.y = (m_newColorLab.b + 128.0f) / 255.0f;
-                    }
-                    break;
-                case Mode.Lab_a:
-                    {
-                        barValue = (m_newColorLab.a + 128.0f) / 255.0f;
-                        areaValue.x = (m_newColorLab.b + 128.0f) / 255.0f;
-                        areaValue.y = m_newColorLab.L / 100.0f;
-                    }
-                    break;
-                case Mode.Lab_b:
-                    {
-                        barValue = (m_newColorLab.b + 128.0f) / 255.0f;
-                        areaValue.x = (m_newColorLab.a + 128.0f) / 255.0f;
-                        areaValue.y = m_newColorLab.L / 100.0f;
-                    }
-                    break;
-                default:
-                    break;
+                switch (mode)
+                {
+                    case Mode.HSV_H:
+                        {
+                            barValue = m_newColorHSV.h / 360.0f;
+                            areaValue.x = m_newColorHSV.s;
+                            areaValue.y = m_newColorHSV.v;
+                        }
+                        break;
+                    case Mode.HSV_S:
+                        {
+                            barValue = m_newColorHSV.s;
+                            areaValue.x = m_newColorHSV.h / 360.0f;
+                            areaValue.y = m_newColorHSV.v;
+                        }
+                        break;
+                    case Mode.HSV_V:
+                        {
+                            barValue = m_newColorHSV.v;
+                            areaValue.x = m_newColorHSV.h / 360.0f;
+                            areaValue.y = m_newColorHSV.s;
+                        }
+                        break;
+                    case Mode.RGB_R:
+                        {
+                            barValue = m_newColor.r;
+                            areaValue.x = m_newColor.b;
+                            areaValue.y = m_newColor.g;
+                        }
+                        break;
+                    case Mode.RGB_G:
+                        {
+                            barValue = m_newColor.g;
+                            areaValue.x = m_newColor.b;
+                            areaValue.y = m_newColor.r;
+                        }
+                        break;
+                    case Mode.RGB_B:
+                        {
+                            barValue = m_newColor.b;
+                            areaValue.x = m_newColor.r;
+                            areaValue.y = m_newColor.g;
+                        }
+                        break;
+                    case Mode.Lab_L:
+                        {
+                            barValue = m_newColorLab.L / 100.0f;
+                            areaValue.x = (m_newColorLab.a + 128.0f) / 255.0f;
+                            areaValue.y = (m_newColorLab.b + 128.0f) / 255.0f;
+                        }
+                        break;
+                    case Mode.Lab_a:
+                        {
+                            barValue = (m_newColorLab.a + 128.0f) / 255.0f;
+                            areaValue.x = (m_newColorLab.b + 128.0f) / 255.0f;
+                            areaValue.y = m_newColorLab.L / 100.0f;
+                        }
+                        break;
+                    case Mode.Lab_b:
+                        {
+                            barValue = (m_newColorLab.b + 128.0f) / 255.0f;
+                            areaValue.x = (m_newColorLab.a + 128.0f) / 255.0f;
+                            areaValue.y = m_newColorLab.L / 100.0f;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            } catch
+            {
+
             }
+            
             pickArea.value = areaValue;
             pickBar.value = barValue;
             pickArea.Refresh();

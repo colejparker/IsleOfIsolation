@@ -228,8 +228,12 @@ namespace ColorPickerUtil
                     break;
             }
             texture.Apply();
-            if (colorPicker.newColorLab.L > 62.0f) indicatorImage.color = Color.black;
-            else indicatorImage.color = Color.white;
+            if(colorPicker.newColorLab !=null)
+            {
+                if (colorPicker.newColorLab.L > 62.0f) indicatorImage.color = Color.black;
+                else indicatorImage.color = Color.white;
+            }
+            
         }
 
         public void Rebuild(CanvasUpdate executing) { }

@@ -16,7 +16,7 @@ public class PlayerEditImage : MonoBehaviour
     [SerializeField] Transform PantsChoiceParent;
     public Image Shoes;
     [SerializeField] Transform ShoesChoiceParent;
-    [SerializeField] Image Beard;
+    public Image Beard;
     [SerializeField] Image Glasses;
     [SerializeField] Image Buff;
     public List<Image> imageHairChoices;
