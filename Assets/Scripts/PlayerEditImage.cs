@@ -130,6 +130,11 @@ public class PlayerEditImage : MonoBehaviour
         player.Eyes.color = this.Eyes.color;
         player.Buff.color = this.Buff.color;
 
+        player.Shirt.enabled = false;
+        player.Shoes.enabled = false;
+        player.Hair.enabled = false;
+        player.Pants.enabled = false;
+
         player.Shirt = player.shirtChoices[imageShirtChoices.IndexOf(Shirt)];
         player.Shirt.color = Shirt.color;
         player.Pants = player.pantsChoices[imagePantsChoices.IndexOf(Pants)];
@@ -138,5 +143,10 @@ public class PlayerEditImage : MonoBehaviour
         player.Shoes.color = Shoes.color;
         player.Hair = player.hairChoices[imageHairChoices.IndexOf(Hair)];
         player.Hair.color = Hair.color;
+
+        player.Shirt.enabled = true;
+        player.Shoes.enabled = true;
+        player.Hair.enabled = true;
+        player.Pants.enabled = true;
     }
 }
