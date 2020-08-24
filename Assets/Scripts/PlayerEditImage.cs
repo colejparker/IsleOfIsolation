@@ -18,7 +18,7 @@ public class PlayerEditImage : MonoBehaviour
     [SerializeField] Transform ShoesChoiceParent;
     [SerializeField] Image Beard;
     [SerializeField] Image Glasses;
-
+    [SerializeField] Image Buff;
     public List<Image> imageHairChoices;
     public List<Image> imageShirtChoices;
     public List<Image> imageShoesChoices;
@@ -36,6 +36,7 @@ public class PlayerEditImage : MonoBehaviour
         this.Glasses.enabled = player.Glasses.enabled;
         this.Skin.color = player.Skin.color;
         this.Eyes.color = player.Eyes.color;
+        this.Buff.color = player.Buff.color;
 
         Shirt = imageShirtChoices[player.shirtChoices.IndexOf(player.Shirt)];
         Shirt.color = player.Shirt.color;
@@ -51,10 +52,11 @@ public class PlayerEditImage : MonoBehaviour
         Hair.enabled = true;
     }
 
-    private void ChangeElement(int incOrDec, Image elementToChange, List<Image> imageList)
+    private void ChangeElement(int incOrDec, ref Image elementToChange, List<Image> imageList)
     {
         Color color = elementToChange.color;
         elementToChange.color = color;
+        elementToChange.enabled = false;
         int currentIndex = imageList.IndexOf(elementToChange);
         if (incOrDec > 0)
         {
@@ -72,39 +74,69 @@ public class PlayerEditImage : MonoBehaviour
             }
         }
         elementToChange = imageList[currentIndex];
+        elementToChange.enabled = true;
         elementToChange.color = color;
     }
 
     public void NextHair()
     {
-        ChangeElement(1, Hair, imageHairChoices);
+        ChangeElement(1, ref Hair, imageHairChoices);
     }
     public void NextShoes()
     {
-        ChangeElement(1, Shoes, imageShoesChoices);
+        ChangeElement(1, ref Shoes, imageShoesChoices);
     }
     public void NextShirt()
     {
-        ChangeElement(1, Shirt, imageShirtChoices);
+        ChangeElement(1, ref Shirt, imageShirtChoices);
     }
     public void NextPants()
     {
-        ChangeElement(1, Pants, imagePantsChoices);
+        ChangeElement(1, ref Pants, imagePantsChoices);
     }
     public void PrevHair()
     {
-        ChangeElement(-1, Hair, imageHairChoices);
+        ChangeElement(-1, ref Hair, imageHairChoices);
     }
     public void PrevShoes()
     {
-        ChangeElement(-1, Shoes, imageShoesChoices);
+        ChangeElement(-1, ref Shoes, imageShoesChoices);
     }
     public void PrevShirt()
     {
-        ChangeElement(-1, Shirt, imageShirtChoices);
+        ChangeElement(-1, ref Shirt, imageShirtChoices);
     }
     public void PrevPants()
     {
-        ChangeElement(-1, Pants, imagePantsChoices);
+        ChangeElement(-1, ref Pants, imagePantsChoices);
+    }
+
+    public void ToggleBeard()
+    {
+        Beard.enabled = !Beard.enabled;
+    }
+
+    public void ToggleGlasses()
+    {
+        Glasses.enabled = !Glasses.enabled;
+    }
+
+    public void SavePlayer()
+    {
+        player.Beard.enabled = this.Beard.enabled;
+        player.Beard.color = this.Beard.color;
+        player.Glasses.enabled = this.Glasses.enabled;
+        player.Skin.color = this.Skin.color;
+        player.Eyes.color = this.Eyes.color;
+        player.Buff.color = this.Buff.color;
+
+        player.Shirt = player.shirtChoices[imageShirtChoices.IndexOf(Shirt)];
+        player.Shirt.color = Shirt.color;
+        player.Pants = player.pantsChoices[imagePantsChoices.IndexOf(Pants)];
+        player.Pants.color = Pants.color;
+        player.Shoes = player.shoesChoices[imageShoesChoices.IndexOf(Shoes)];
+        player.Shoes.color = Shoes.color;
+        player.Hair = player.hairChoices[imageHairChoices.IndexOf(Hair)];
+        player.Hair.color = Hair.color;
     }
 }

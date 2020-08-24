@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public Transform PantsChoiceParent;
     public SpriteRenderer Shoes;
     public Transform ShoesChoiceParent;
-    [SerializeField] SpriteRenderer Buff;
+    public SpriteRenderer Buff;
     [SerializeField] ParticleSystem TorchFire;
     [SerializeField] SpriteRenderer ImmunityNecklace;
     public SpriteRenderer Beard;

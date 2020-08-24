@@ -23,4 +23,10 @@ public class EditPlayer : MonoBehaviour
         player.ToggleAllPlayers(true);
         Destroy(gameObject);
     }
+
+    public void SavePlayer()
+    {
+        mainPlayerImage.SavePlayer();
+        CloseWindow();
+    }
 }
