@@ -27,6 +27,8 @@ public class EditPlayer : MonoBehaviour
     public void SavePlayer()
     {
         mainPlayerImage.SavePlayer();
+        player.name = InputText.text;
+        player.namePass.text = InputText.text;
         CloseWindow();
     }
 }

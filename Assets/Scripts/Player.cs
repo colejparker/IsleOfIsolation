@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject editStats;
     [SerializeField] SpriteRenderer voteParchment;
-    [SerializeField] TextMesh namePass;
+    public TextMesh namePass;
     [SerializeField] Transform challengeBar;
     [SerializeField] Transform socialBar;
     [SerializeField] Transform strategyBar;
