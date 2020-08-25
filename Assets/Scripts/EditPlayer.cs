@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -33,6 +34,11 @@ public class EditPlayer : MonoBehaviour
     [SerializeField] Transform statsParent;
     [SerializeField] Transform relationshipsParent;
 
+    [SerializeField] Transform RelationshipScrollContent;
+
+    [SerializeField] RelationshipPlayerSlider relationshipPlayerSlider;
+
+    List<RelationshipPlayerSlider> relPlayerSliders = new List<RelationshipPlayerSlider>();
 
     public void setPlayer(Player incomingPlayer)
     {
@@ -43,6 +49,7 @@ public class EditPlayer : MonoBehaviour
             hairColorImage.color = player.Hair.color;
             InputText.text = player.name;
             UpdateSliders();
+            CreateRelationships();
         }
     }
 
@@ -58,6 +65,7 @@ public class EditPlayer : MonoBehaviour
         player.name = InputText.text;
         player.namePass.text = InputText.text;
         UpdatePlayerFromSliders();
+        UpdatePlayerRelationships();
         CloseWindow();
     }
 
@@ -108,5 +116,30 @@ public class EditPlayer : MonoBehaviour
         showingStats = !showingStats;
         statsParent.gameObject.SetActive(showingStats);
         relationshipsParent.gameObject.SetActive(!showingStats);
+    }
+
+    private void CreateRelationships()
+    {
+        foreach (Tuple<Player,Player, int> tuple in player.relationships)
+        {
+            RelationshipPlayerSlider rps = Instantiate(relationshipPlayerSlider, RelationshipScrollContent.transform.position, Quaternion.identity);
+            rps.CreateFromPlayer(tuple.Item2);
+            rps.UpdateSlider(tuple.Item3);
+            rps.transform.parent = RelationshipScrollContent;
+            relPlayerSliders.Add(rps);
+        }
+    }
+
+    private void UpdatePlayerRelationships()
+    {
+        int counter = 0;
+        List<Tuple<Player, Player, int>> newRelationships = new List<Tuple<Player, Player, int>>();
+        foreach (Tuple<Player, Player, int> tuple in player.relationships)
+        {
+            RelationshipPlayerSlider rps = relPlayerSliders[counter];
+            newRelationships.Add(new Tuple<Player, Player, int>(player, rps.relPlayer, rps.GetSliderValue()));
+            counter++;
+        }
+        player.relationships = newRelationships;
     }
 }

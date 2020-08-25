@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class StatsSlider : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI sliderText;
-    [SerializeField] string startString;
-    [SerializeField] Slider slider;
+    public string startString;
+    public Slider slider;
     // Start is called before the first frame update
     void Start()
     {
