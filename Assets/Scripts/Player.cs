@@ -47,14 +47,14 @@ public class Player : MonoBehaviour
     public int leadership; // 0-9 on how likely they are to be higher in alliance hierarchy
     public int likeability;  // 0-9 on how likely they are to form good relationships
     public int read;  // 0-9 on how likely to know when they're the primary target
-    public int manoeuvre;  // 0-9 on how good they are at avoiding being the target while they're in the minority
-    public int downplay;  // 0-9 on how good they are at avoiding being the target while they're a large threat
+    public int loyalty; // 0-9 on how likely they are to stick with an alliance based on age of the alliance
     public int temperament;  // 0-9 on how likely they are to recover relationships after the other has wronged them
 
     public int aggressiveness; // 0-9 on how willing they are to target threats other than themselves
     public int hunting;  // 0-9 on how likely they are to find advantages
     public int numbers;  // 0-9 on how strong they are at figuring out the likely numbers of tribal and adjusting accordingly
-    public int loyalty; // 0-9 on how likely they are to stick with an alliance based on age of the alliance
+    public int scramble;  // 0-9 on how good they are at avoiding being the target while they're in the minority
+    public int downplay;  // 0-9 on how good they are at avoiding being the target while they're a large threat
 
     public int strength;  // 0-9 on how good they are at strength challenges
     public int endurance;  // 0-9 on how good they are at endurance challenges
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
     {
         likeability = Random.Range(0, 10);
         read = Random.Range(0, 10);
-        manoeuvre = Random.Range(0, 10);
+        scramble = Random.Range(0, 10);
         downplay = Random.Range(0, 10);
         temperament = Random.Range(0, 10);
 
@@ -165,10 +165,10 @@ public class Player : MonoBehaviour
         Buff.color = color;
     }
 
-    private void UpdateStrengths()
+    public void UpdateStrengths()
     {
-        socialStrength = Mathf.RoundToInt((leadership + likeability + read + manoeuvre + downplay + temperament) /6);
-        strategyStrength = Mathf.RoundToInt((aggressiveness + hunting + numbers + loyalty) / 4);
+        socialStrength = Mathf.RoundToInt((leadership + likeability + read + loyalty + temperament) /5);
+        strategyStrength = Mathf.RoundToInt((aggressiveness + hunting + numbers + scramble + downplay) / 5);
         challengeStrength = Mathf.RoundToInt((strength + endurance + puzzles + speed) / 4);
         threatLevel = Mathf.RoundToInt((socialStrength + strategyStrength + challengeStrength) / 3);
 
