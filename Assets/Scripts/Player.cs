@@ -80,11 +80,18 @@ public class Player : MonoBehaviour
     //When initializing a player, SetOriginalTribeColor and SetPlayerID also need to be called.
     void Start()
     {
+        
+    }
+
+    public Player createPlayer(int playerID)
+    {
+        this.playerID = playerID;
         RandomizeStats();
         GenerateName();
         //ToggleTorch();
         UpdateStrengths();
         RandomizeAppearance();
+        return this;
     }
 
     private void GenerateName()
@@ -95,38 +102,43 @@ public class Player : MonoBehaviour
 
     private void RandomizeStats()
     {
-        likeability = Random.Range(0, 10);
-        read = Random.Range(0, 10);
-        scramble = Random.Range(0, 10);
-        downplay = Random.Range(0, 10);
-        temperament = Random.Range(0, 10);
+        likeability = RandomBetweenTwo(0, 11);
+        read = RandomBetweenTwo(0, 11);
+        scramble = RandomBetweenTwo(0, 11);
+        downplay = RandomBetweenTwo(0, 11);
+        temperament = RandomBetweenTwo(0, 11);
 
-        aggressiveness = Random.Range(0, 10);
-        hunting = Random.Range(0, 10);
-        numbers = Random.Range(0, 10);
-        loyalty = Random.Range(0, 10);
+        aggressiveness = RandomBetweenTwo(0, 11);
+        hunting = RandomBetweenTwo(0, 11);
+        numbers = RandomBetweenTwo(0, 11);
+        loyalty = RandomBetweenTwo(0, 11);
 
-        strength = Random.Range(0, 10);
-        if (strength > 4)
+        strength = RandomBetweenTwo(0, 11);
+        if (strength > 5)
         {
-            leadership = Random.Range(3, 10);
-            endurance = Random.Range(3, 10);
-            speed = Random.Range(3, 10);
+            leadership = RandomBetweenTwo(3, 11);
+            endurance = RandomBetweenTwo(3, 11);
+            speed = RandomBetweenTwo(3, 11);
         }
         else
         {
-            endurance = Random.Range(0, 8);
-            speed = Random.Range(0, 8);
-            leadership = Random.Range(0, 8);
+            endurance = RandomBetweenTwo(0, 8);
+            speed = RandomBetweenTwo(0, 8);
+            leadership = RandomBetweenTwo(0, 8);
         }
-        if (numbers > 4)
+        if (numbers > 5)
         {
-            puzzles = Random.Range(3, 10);
+            puzzles = RandomBetweenTwo(3, 11);
         }
         else
         {
-            puzzles = Random.Range(0, 7);
+            puzzles = RandomBetweenTwo(0, 7);
         }
+    }
+
+    public int RandomBetweenTwo(int x, int y)
+    {
+        return Mathf.Clamp(Mathf.RoundToInt((Random.Range(x, y) + Random.Range(x, y)) / 2f), 0, 9);
     }
 
     public void ToggleStatsView()
@@ -147,10 +159,6 @@ public class Player : MonoBehaviour
         if (Pants) Pants.color = GenerateCloseColor(color);
     }
 
-    public void SetPlayerId(int playerID)
-    {
-        this.playerID = playerID;
-    }
 
     private Color GenerateCloseColor(Color color)
     {

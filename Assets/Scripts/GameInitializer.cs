@@ -69,17 +69,17 @@ public class GameInitializer : MonoBehaviour
         List<Player> players = new List<Player>();
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            players.Add(generatePlayer(i, numberOfPlayers));
+            players.Add(generatePlayer(i));
         }
         return players;
     }
 
-    public Player generatePlayer(int playerIndex, int numberOfPlayers)
+    public Player generatePlayer(int playerIndex)
     {
         GameObject newPO = Instantiate(PlayerObject, transform.localPosition, Quaternion.identity);
         newPO.transform.parent = playerContainer.transform;
         Player player = newPO.GetComponent<Player>();
-        player.SetPlayerId(playerIndex);
+        player = player.createPlayer(playerIndex);
         return player;
     }
 
@@ -169,7 +169,6 @@ public class GameInitializer : MonoBehaviour
         List<Tuple<Player, Player, int>> listOfRelationships = new List<Tuple<Player, Player, int>>();
         int playerCounter = 0;
         int numberOfPlayers = players.Count;
-        Random rnd = new Random();
         foreach (Player player in players)
         {
             int partnerCounter = 0;
@@ -178,10 +177,10 @@ public class GameInitializer : MonoBehaviour
                 //to redo counting in likeability
                 if (partnerCounter > playerCounter)
                 {
-                    int strength = Mathf.RoundToInt(Random.Range(3, 7));
-                    int plusOrMinus = Mathf.RoundToInt(Random.Range(-1, 1));
+                    int strength = Mathf.Clamp(Mathf.RoundToInt(Random.Range(partner.likeability - 2, partner.likeability + 2)), 2, 7);
                     Tuple<Player, Player, int> playerRel = new Tuple<Player, Player, int>(player, partner, strength);
-                    Tuple<Player, Player, int> partnerRel = new Tuple<Player, Player, int>(partner, player, (strength + plusOrMinus));
+                    int partnerStrength = Mathf.Clamp(Mathf.RoundToInt(Random.Range(player.likeability - 2, player.likeability + 2)), 2, 7);
+                    Tuple<Player, Player, int> partnerRel = new Tuple<Player, Player, int>(partner, player, partnerStrength);
                     listOfRelationships.Add(playerRel);
                     player.addRelationship(playerRel);
                     listOfRelationships.Add(partnerRel);
