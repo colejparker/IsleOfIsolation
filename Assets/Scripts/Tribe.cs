@@ -28,4 +28,13 @@ public class Tribe : MonoBehaviour
             player.SetNewTribeColor(this.tribeColor);
         }
     }
+
+    public void EditTribeColor(Color color)
+    {
+        this.tribeColor = color;
+        foreach (Player player in members)
+        {
+            player.SetOriginalTribeColor(this.tribeColor);
+        }
+    }
 }

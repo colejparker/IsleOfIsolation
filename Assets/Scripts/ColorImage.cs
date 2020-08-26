@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class ColorImage : MonoBehaviour
 {
-    Image image;
+    public Image image;
     [SerializeField] ColorPicker colorPicker;
     [SerializeField] PlayerEditImage mainPlayerImage;
-    public string affectedElement = "Hair";
+    public string affectedElement;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +39,11 @@ public class ColorImage : MonoBehaviour
         {
             image.color = mainPlayerImage.Skin.color;
         }
+    }
+
+    public void TribeColor(Tribe tribe)
+    {
+        image.color = tribe.tribeColor;
     }
 
 

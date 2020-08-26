@@ -323,5 +323,13 @@ public class Player : MonoBehaviour
         this.gameObject.SetActive(boolValue);
     }
 
+    public void AllPlayersEditToggle(bool boolValue)
+    {
+        foreach (Tuple<Player, Player, int> tuple in relationships)
+        {
+            tuple.Item2.inEditMode = boolValue;
+        }
+        this.inEditMode = boolValue;
+    }
 
 }
