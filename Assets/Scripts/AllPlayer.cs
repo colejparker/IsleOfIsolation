@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AllPlayer : MonoBehaviour
 {
@@ -118,5 +119,10 @@ public class AllPlayer : MonoBehaviour
             Destroy(t.gameObject);
         }
         startGame.gameObject.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }

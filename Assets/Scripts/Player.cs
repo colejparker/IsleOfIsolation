@@ -31,9 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject editStats;
     [SerializeField] SpriteRenderer voteParchment;
     public TextMesh namePass;
-    [SerializeField] Transform challengeBar;
-    [SerializeField] Transform socialBar;
-    [SerializeField] Transform strategyBar;
+    public Transform challengeBar;
+    public Transform socialBar;
+    public Transform strategyBar;
 
     [SerializeField] TextAsset HairColorsList;
     [SerializeField] TextAsset EyesColorsList;
@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
     public int strategyStrength;  // 0-9 on how good they are strategically
     public int challengeStrength;  // 0-9 on how good they are at challenges
 
-
     public int threatLevel;  // 0-9+ on how threatening they currently are in the game. starts as average of strengths but can go higher or lower
 
     public int playerID;  // unique numerical identifier
@@ -73,6 +72,8 @@ public class Player : MonoBehaviour
     public bool isImmune = false;  // boolean on if they are immune or not in tribal
 
     int votes = 1; // how many votes they have at a tribal council
+
+    EditTribeTitle[] editTribeTitles;
 
     public List<Advantage> advantages = new List<Advantage>(); // the advantages currently in possession of the player
 
@@ -283,6 +284,11 @@ public class Player : MonoBehaviour
 
     private void OnMouseDown()
     {
+        editTribeTitles = FindObjectsOfType<EditTribeTitle>();
+        foreach (EditTribeTitle edt in editTribeTitles)
+        {
+            edt.gameObject.SetActive(false);
+        }
         if (inEditMode)
         {
             hoverSquare.enabled = false;
@@ -321,6 +327,13 @@ public class Player : MonoBehaviour
             tuple.Item2.gameObject.SetActive(boolValue);
         }
         this.gameObject.SetActive(boolValue);
+        if(boolValue)
+        {
+            foreach (EditTribeTitle edt in editTribeTitles)
+            {
+                edt.gameObject.SetActive(true);
+            }
+        }
     }
 
     public void AllPlayersEditToggle(bool boolValue)
